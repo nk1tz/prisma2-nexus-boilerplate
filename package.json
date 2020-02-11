@@ -1,0 +1,39 @@
+{
+  "name": "prisma2-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "yarn -s clean && yarn -s generate && tsc",
+    "style": "prettier --write 'src/**/*'",
+    "dev": "ts-node-dev --tree-kill --no-notify --respawn --transpile-only backend/main.ts",
+    "dev:migrate": "prisma2 migrate save --experimental -c && prisma2 migrate up --experimental -c",
+    "generate": "yarn -s generate:prisma && yarn -s generate:nexus",
+    "generate:prisma": "prisma2 generate",
+    "generate:nexus": "NODE_ENV=development ts-node --transpile-only backend/schema",
+    "data:seed": "ts-node prisma/seed-data.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "2.0.0-preview021",
+    "graphql": "^14.6.0",
+    "graphql-yoga": "^1.18.3",
+    "nexus": "^0.12.0-rc.11",
+    "nexus-prisma": "^0.9.1-next.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@types/faker": "^4.1.5",
+    "@types/ws": "^7.2.0",
+    "faker": "^4.1.0",
+    "prisma2": "2.0.0-preview021",
+    "ts-node": "^8.6.2",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.7.5"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
